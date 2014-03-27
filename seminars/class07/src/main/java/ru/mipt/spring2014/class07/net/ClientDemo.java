@@ -14,13 +14,13 @@ public class ClientDemo
 {
 	private static final int PORT = 9999;
 
-	public static void main (String[] args)
+	public static void main (String[] args) throws InterruptedException
 	{
-		for (int id = 1; id < 5; id++)
+		for (;;)
 		{
-			System.out.println ("Client: sending request #" + id);
+			Thread.sleep(1000);
 			System.out.println ("Client: received response: "
-					+ communicate (new Request (id, "Sample MesSage " + Math.random ())));
+					+ communicate (new Request (1, "Sample MesSage " + Math.random ())));
 		}
 	}
 

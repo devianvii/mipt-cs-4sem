@@ -13,7 +13,7 @@ public class ExecutorsDemo
 {
 	public static void main (String[] args) throws InterruptedException, ExecutionException
 	{
-		final ExecutorService execSrv = Executors.newFixedThreadPool (2);
+		final ExecutorService execSrv = Executors.newFixedThreadPool (1);
 
 		final int tasksNumber = 6;
 		final Future<Double>[] tasks = new Future[tasksNumber];

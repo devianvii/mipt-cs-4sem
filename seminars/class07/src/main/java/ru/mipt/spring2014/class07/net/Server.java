@@ -6,6 +6,9 @@ package ru.mipt.spring2014.class07.net;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 public class Server implements Runnable
 {
@@ -18,7 +21,11 @@ public class Server implements Runnable
 
 	public void run ()
 	{
+		
+		final ExecutorService execSrv = Executors.newFixedThreadPool (1);
+
 		final ServerSocket socket;
+		
 		try{
 			System.out.println ("Server: Start accepting connections");
 			socket = new ServerSocket (port);
@@ -26,7 +33,7 @@ public class Server implements Runnable
 			try{
 				while (!Thread.interrupted ())
 				{
-					new Thread (new RequestHandler (socket.accept ())).start ();
+					execSrv.submit (new RequestHandler (socket.accept ()));
 					System.out.println ("Server: Connection accepted");
 				}
 			} finally
